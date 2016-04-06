@@ -1,8 +1,13 @@
 # ID Site
 
-Framework integrations must implement the `web.idSite.enabled` behavior. 
+ID Site is a hosted login & registration application that simplifies single-sign on (SSO) flows by providing a common place for redirects and cookie storage. If the developer has chosen to use ID Site, they likely have multiple Stormpath Applications that are redirecting the user to ID Site for authentication. When the user authenticates at ID Site, they are returned to the original application (service provider, AKA the SP) with Stormpath Assertion JWT. The application can verify this token and resolve the account that has authenticated.
 
-ID Site is used as a replacement for the `/login`, `/logout`, `/forgot`, and `/register` pages, which will redirect to ID Site instead of performing their default behavior. 
+If the developer needs to use ID Site, they will enable it with `stormpath.web.idSite.enabled`. When this value is true, we should redirect the user to ID site when the following URIs are accessed with a GET request:
+
+* `stormpath.web.login.uri`
+* `stormpath.web.logout.uri`
+* `stormpath.web.register.uri`
+* `stormpath.web.forgot.uri`
 
 In addition, enabling ID Site in the configuration enables an `/idSiteResult` endpoint. 
 
