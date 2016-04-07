@@ -43,4 +43,4 @@ A user logged out. Follow the standard logout logic.
 
 ## Errors
 
-If not a valid Stormpath JWT, render a `text/html`401 Unauthorized` error. 
+If not a valid Stormpath JWT, render a `text/html` 401 Unauthorized` error. 
