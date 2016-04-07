@@ -2,14 +2,14 @@
 
 ID Site is a hosted login & registration application that simplifies single-sign on (SSO) flows by providing a common place for redirects and cookie storage. If the developer has chosen to use ID Site, they likely have multiple Stormpath Applications that are redirecting the user to ID Site for authentication. When the user authenticates at ID Site, they are returned to the original application (service provider, AKA the SP) with Stormpath Assertion JWT. The application can verify this token and resolve the account that has authenticated.
 
-If the developer needs to use ID Site, they will enable it with `stormpath.web.idSite.enabled`. When this value is true, we should redirect the user to ID site when the following URIs are accessed with a GET request:
+If the developer needs to use ID Site, they will enable it with `stormpath.web.idSite.enabled`. When this value is true, we should redirect the user to ID Site when the following URIs are accessed with a GET request:
 
-* `stormpath.web.login.uri`
+* `stormpath.web.login.uri` - with a path of `stormpath.web.idSite.loginUri`
 * `stormpath.web.logout.uri`
-* `stormpath.web.register.uri`
-* `stormpath.web.forgot.uri`
+* `stormpath.web.register.uri` - with a path of `stormpath.web.idSite.registerUri`
+* `stormpath.web.forgot.uri` - with a path of `stormpath.web.idSite.forgotUri`
 
-In addition, enabling ID Site in the configuration enables an `/idSiteResult` endpoint. 
+In addition, enabling ID Site enables an `/idSiteResult` endpoint, configurable via `stormpath.web.idSite.uri`. 
 
 # `/idSiteResult`
 
@@ -19,7 +19,7 @@ In addition, enabling ID Site in the configuration enables an `/idSiteResult` en
 
 ## Content Type
 
-* Any
+* Any - always follows `text/html` logic.
 
 ## Parameters
 
@@ -31,15 +31,15 @@ The `jwtResponse` from ID Site can have three states, with the following respons
 
 **REGISTERED**
 
-A new user was created. Follow the standard post-registration logic (like redirecting to the login page or autologin). 
+A new user was created. Follow the standard [post registration logic](registration.md#-post-response-handling) (like redirecting to the login page or autologin). 
 
 **AUTHENTICATED**
 
-A user logged in. Follow the standard login logic (like setting cookies, and redirecting the user)
+A user logged in. Follow the standard [post login logic](login.md#-post-response-handling) (like setting cookies, and redirecting the user)
 
 **LOGOUT**
 
-A user logged out. Follow the standard logout logic.
+A user logged out. Follow the standard [post logout logic](logout.md).
 
 ## Errors
 
