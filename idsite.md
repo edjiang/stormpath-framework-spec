@@ -9,9 +9,9 @@ If the developer needs to use ID Site, they will enable it with `stormpath.web.i
 * `stormpath.web.register.uri` - with a path of `stormpath.web.idSite.registerUri`
 * `stormpath.web.forgot.uri` - with a path of `stormpath.web.idSite.forgotUri`
 
-In addition, enabling ID Site enables an `/idSiteResult` endpoint, configurable via `stormpath.web.idSite.uri`. 
+In addition, enabling ID Site enables an `/callbacks/stormpath` endpoint, configurable via `stormpath.web.idSite.uri`. 
 
-# `/idSiteResult`
+# `/callbacks/stormpath`
 
 ## Request Types
 

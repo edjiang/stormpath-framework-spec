@@ -171,7 +171,7 @@ stormpath:
     # through ID Site on logout.
     idSite:
       enabled: false
-      uri: "/idSiteResult"
+      uri: "/callbacks/stormpath"
       loginUri: ""
       forgotUri: "/#/forgot"
       registerUri: "/#/register"
