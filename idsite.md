@@ -2,16 +2,26 @@
 
 ID Site is a hosted login & registration application that simplifies single-sign on (SSO) flows by providing a common place for redirects and cookie storage. If the developer has chosen to use ID Site, they likely have multiple Stormpath Applications that are redirecting the user to ID Site for authentication. When the user authenticates at ID Site, they are returned to the original application (service provider, AKA the SP) with Stormpath Assertion JWT. The application can verify this token and resolve the account that has authenticated.
 
-If the developer needs to use ID Site, they will enable it with `stormpath.web.idSite.enabled`. When this value is true, we should redirect the user to ID Site when the following URIs are accessed with a GET request:
+If the developer needs to use ID Site, they will enable it with `stormpath.web.idSite.enabled`. `stormpath.web.callback.enabled` must also be true, otherwise the integration should throw an error. 
+
+When ID Site is enabled, we should redirect the user to ID Site when the following URIs are accessed with a GET request:
 
 * `stormpath.web.login.uri` - with a path of `stormpath.web.idSite.loginUri`
 * `stormpath.web.logout.uri`
 * `stormpath.web.register.uri` - with a path of `stormpath.web.idSite.registerUri`
 * `stormpath.web.forgot.uri` - with a path of `stormpath.web.idSite.forgotUri`
 
-In addition, enabling ID Site enables an `/callbacks/stormpath` endpoint, configurable via `stormpath.web.idSite.uri`. 
+In addition, ID Site needs `stormpath.web.callback.enabled` to be true, so we can pass back the Stormpath assertion JWT. 
 
-# `/callbacks/stormpath`
+# `/stormpathCallback`
+
+A callback so Stormpath can pass information to the web application. This is currently being used for ID Site, but may be used in the future for SAML, Stormpath handled social login, webhooks, and other messages from Stormpath. 
+
+## Configuration
+
+    callback: 
+      enabled: true
+      uri: "/stormpathCallback"
 
 ## Request Types
 
